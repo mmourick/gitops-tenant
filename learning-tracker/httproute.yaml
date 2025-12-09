@@ -1,0 +1,18 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  name: learning-tracker-route
+spec:
+  parentRefs:
+  - name: http-gateway-global
+    namespace: gateway-system
+  hostnames:
+  - learning-tracker.mathijs.xebia-k8s-training.xyz
+  rules:
+  - matches:
+    - path:
+        value: /
+        type: PathPrefix
+    backendRefs:
+    - name: learning-tracker-frontend
+      port: 80
